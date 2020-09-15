@@ -57,10 +57,9 @@ namespace IDE
             int fila = 1;
             string lexema = "";
             Char c;
-            //MessageBox.Show(entrada, "111 entrada");
+
             entrada = entrada + " ";
-            //entrada = entrada;
-            //MessageBox.Show(entrada, "222 entrada");
+
             for (int i = 0; i < entrada.Length; i++)
             {
                 c = entrada[i];
@@ -81,11 +80,7 @@ namespace IDE
                             estado = 2;
                             lexema += c;
                         }
-                        //else if (c == '-')
-                        //{
-                        //    estado = 3;
-                        //    lexema += c;
-                        // }
+
                         else if (c == '"')
                         {
                             estado = 4;
@@ -172,42 +167,14 @@ namespace IDE
 
                         /*fin nuevos*/
 
-                        /*operadores mat*/
                         else if (c == '+')
                         {
-                            lexema += c;
-                            addToken(lexema, "Suma", fila, columna, i);
-                            lexema = "";
-                        }
-                        else if (c == '-')
-                        {
-                            lexema += c;
-                            addToken(lexema, "Resta", fila, columna, i);
-                            lexema = "";
-                        }
-                        else if (c == '*')
-                        {
-                            lexema += c;
-                            addToken(lexema, "Multiplicacion", fila, columna, i);
-                            lexema = "";
-                        }
-                        else if (c == '/')
-                        {
-                            lexema += c;
-                            addToken(lexema, "Division", fila, columna, i);
-                            lexema = "";
-                        }
-
-
-                        /*fin operadors mat*/
-                        else
-                        {
-                            //addError(c.ToString() , "Desconocido", fila, columna);
-                            estado = -99;
+                            estado = 10;
                             i--;
                             columna--;
                         }
                         break;
+                     
                     case 1:
                         //if (Char.IsLetter(c))
                         if (Char.IsLetterOrDigit(c) || c == '_')
@@ -370,12 +337,45 @@ namespace IDE
                         break;
                     /*fin nuevo*/
 
+                    case 10:
+                        if (c == '+')
+                        {
+                            lexema += c;
+                            addToken(lexema, "Suma", fila, columna, i);
+                            lexema = "";
+                        }
+                        else if (c == '-')
+                        {
+                            lexema += c;
+                            addToken(lexema, "Resta", fila, columna, i);
+                            lexema = "";
+                        }
+                        else if (c == '*')
+                        {
+                            lexema += c;
+                            addToken(lexema, "Multiplicacion", fila, columna, i);
+                            lexema = "";
+                        }
+                        else if (c == '/')
+                        {
+                            lexema += c;
+                            addToken(lexema, "Division", fila, columna, i);
+                            lexema = "";
+                        }
+                        else
+                        {
+                            addError(c.ToString() , "Desconocido", fila, columna);
+                            estado = -99;
+                            i--;
+                            columna--;
+                        }
+                        break;
+
+
+                    //estado de error.
                     case -99:
                         lexema += c;
-
-
                         addError(lexema, "Carácter Desconocido", fila, columna);
-
                         estado = 0;
                         lexema = "";
                         break;

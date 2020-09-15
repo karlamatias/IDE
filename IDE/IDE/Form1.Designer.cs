@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoProyectoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,6 +39,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.Salida = new System.Windows.Forms.RichTextBox();
             this.Errores = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,20 +67,23 @@
             // nuevoProyectoToolStripMenuItem
             // 
             this.nuevoProyectoToolStripMenuItem.Name = "nuevoProyectoToolStripMenuItem";
-            this.nuevoProyectoToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.nuevoProyectoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nuevoProyectoToolStripMenuItem.Text = "Nuevo Proyecto ";
+            this.nuevoProyectoToolStripMenuItem.Click += new System.EventHandler(this.nuevoProyectoToolStripMenuItem_Click);
             // 
             // abrirProyectoToolStripMenuItem
             // 
             this.abrirProyectoToolStripMenuItem.Name = "abrirProyectoToolStripMenuItem";
-            this.abrirProyectoToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.abrirProyectoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.abrirProyectoToolStripMenuItem.Text = "Abrir Proyecto";
+            this.abrirProyectoToolStripMenuItem.Click += new System.EventHandler(this.abrirProyectoToolStripMenuItem_Click);
             // 
             // guardarProyectoToolStripMenuItem
             // 
             this.guardarProyectoToolStripMenuItem.Name = "guardarProyectoToolStripMenuItem";
-            this.guardarProyectoToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.guardarProyectoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.guardarProyectoToolStripMenuItem.Text = "Guardar Proyecto";
+            this.guardarProyectoToolStripMenuItem.Click += new System.EventHandler(this.guardarProyectoToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
@@ -96,11 +101,14 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(273, 12);
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(151, 1);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "Analizar";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -120,6 +128,10 @@
             this.Errores.Size = new System.Drawing.Size(40, 13);
             this.Errores.TabIndex = 4;
             this.Errores.Text = "Errores";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -153,6 +165,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox Salida;
         private System.Windows.Forms.Label Errores;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 
