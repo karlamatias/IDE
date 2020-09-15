@@ -16,6 +16,7 @@ namespace IDE
         public Form1()
         {
             InitializeComponent();
+            Entrada.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -44,6 +45,7 @@ namespace IDE
         {
             Entrada.Enabled = true;
             Entrada.Clear();
+            Salida.Clear();
         }
 
         private void abrirProyectoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -73,6 +75,11 @@ namespace IDE
                 Entrada.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.PlainText);
                 MessageBox.Show("Archivo Guardado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Environment.Exit(0);
         }
     }
 }
