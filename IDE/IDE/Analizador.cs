@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,8 +69,8 @@ namespace IDE
                 //MessageBox.Show(estado.ToString(), "estado");
                 switch (estado)
                 {
+
                     case 0:
-                        //columna++;
                         if (Char.IsLetter(c))
                         {
                             estado = 1;
@@ -80,7 +81,6 @@ namespace IDE
                             estado = 2;
                             lexema += c;
                         }
-
                         else if (c == '"')
                         {
                             estado = 4;
@@ -109,52 +109,51 @@ namespace IDE
                             lexema += c;
                             ////addToken(lexema, "llaveIzq", pos + 1, 0);
 
-                            addToken(lexema, "Llave que Abre", fila, columna, i - lexema.Length);
+                            addToken(lexema, "llaveIzq", fila, columna, i - lexema.Length);
                             lexema = "";
                         }
                         else if (c == '}')
                         {
                             lexema += c;
-                            addToken(lexema, "Llave que Cierra", fila, columna, i - lexema.Length);
+                            addToken(lexema, "llaveDer", fila, columna, i - lexema.Length);
                             ////addToken(lexema, "llaveDer", pos + 1, 0);
                             lexema = "";
                         }
                         else if (c == '(')
                         {
                             lexema += c;
-                            addToken(lexema, "Parentesis que Abre", fila, columna, i - lexema.Length);
+                            addToken(lexema, "parIzq", fila, columna, i - lexema.Length);
                             lexema = "";
                         }
                         else if (c == ')')
                         {
                             lexema += c;
-                            addToken(lexema, "Parentesis que Cierra", fila, columna, i - lexema.Length);
+                            addToken(lexema, "parDer", fila, columna, i - lexema.Length);
                             lexema = "";
                         }
                         else if (c == ',')
                         {
                             lexema += c;
-                            //addToken(lexema, "coma", pos + 1, 0);
                             lexema = "";
                         }
 
                         else if (c == ';')
                         {
                             lexema += c;
-                            addToken(lexema, "Punto y Coma", fila, columna, i - lexema.Length);
+                            addToken(lexema, "Final Sentencia", fila, columna, i - lexema.Length);
                             lexema = "";
                         }
 
                         else if (c == '<')
                         {
                             lexema += c;
-                            addToken(lexema, "Menor que ", fila, columna, i - lexema.Length);
+                            addToken(lexema, "Menor", fila, columna, i - lexema.Length);
                             lexema = "";
                         }
                         else if (c == '>')
                         {
                             lexema += c;
-                            addToken(lexema, "Mayor que ", fila, columna, i - lexema.Length);
+                            addToken(lexema, "Mayor", fila, columna, i - lexema.Length);
                             lexema = "";
                         }
 
@@ -165,16 +164,44 @@ namespace IDE
                             lexema = "";
                         }
 
-                        /*fin nuevos*/
 
+                        /*operadores mat*/
                         else if (c == '+')
                         {
-                            estado = 10;
+                            lexema += c;
+                            addToken(lexema, "Suma", fila, columna, i);
+                            lexema = "";
+                        }
+                        else if (c == '-')
+                        {
+                            lexema += c;
+                            addToken(lexema, "Menos", fila, columna, i);
+                            lexema = "";
+                        }
+                        else if (c == '*')
+                        {
+                            lexema += c;
+                            addToken(lexema, "Multiplicacion", fila, columna, i);
+                            lexema = "";
+                        }
+                        else if (c == '/')
+                        {
+                            lexema += c;
+                            addToken(lexema, "Division", fila, columna, i);
+                            lexema = "";
+                        }
+
+
+                        /*fin operadors mat*/
+                        else
+                        {
+                            //addError(c.ToString() , "Desconocido", fila, columna);
+                            estado = -99;
                             i--;
                             columna--;
                         }
+
                         break;
-                     
                     case 1:
                         //if (Char.IsLetter(c))
                         if (Char.IsLetterOrDigit(c) || c == '_')
@@ -190,29 +217,13 @@ namespace IDE
                             encontrado = Macht_enReser(lexema);
                             if (encontrado)
                             {
-                                //token = new Token(1, "PalabraReservada", lexema, fila, columna);
-                                //tokens.add(token);
-
-                                //////////////////////////77MessageBox.Show("*1*" + lexema + "*1*", "lexema");
                                 addToken(lexema, "Reservada", fila, columna, i - lexema.Length);
                             }
                             else
                             {
-                                ////////////////////////777MessageBox.Show("*2*" + lexema + "*2*", "lexema");
                                 addToken(lexema, "Identificador", fila, columna, i - lexema.Length);
-                                /*nuevo inicio*/
-                                /*Boolean encon_tipo = false;
-                                encon_tipo = Macht_enTipo(lexema);
-                                if (encon_tipo)
-                                {  addToken(lexema, "Tipo", fila, columna);  }
-                                else
-                                {  addToken(lexema, "Identificador", fila, columna);  }*/
-                                /*nuevo fin*/
-
 
                             }
-                            //MessageBox.Show("*2*" + lexema + "*2*", "lexema");
-                            //addToken(lexema, "Identificador", fila, columna);
 
                             lexema = "";
                             i--;
@@ -220,44 +231,45 @@ namespace IDE
                             estado = 0;
                         }
                         break;
+
                     case 2:
                         if (Char.IsDigit(c))
                         {
-                            lexema += c;
                             estado = 2;
-                        }
-                        /*nuevo*/
-                        else if (c == '.')
-                        {
-                            estado = 8;
                             lexema += c;
                         }
-                        /*nuevo fin*/
+                        else if (c.CompareTo('.') == 0)
+                        {
+                            estado = 3;
+                            lexema += c;
+                        }
                         else
                         {
-                            //token = new Token(3, "Numero", lexema, fila, columna);
-                            //tokens.add(token);
-                            addToken(lexema, "Digito", fila, columna, i - lexema.Length);
+                            addToken(lexema, "Entero", fila, columna, i - lexema.Length);
                             lexema = "";
                             i--;
                             columna--;
                             estado = 0;
                         }
                         break;
+
+
                     case 3:
                         if (Char.IsDigit(c))
                         {
+                            estado = 3;
                             lexema += c;
-                            estado = 2;
                         }
                         else
                         {
-                            estado = -99;
-                            i = i - 2;
-                            columna = columna - 2;
+                            addToken(lexema, "Decimal", fila, columna, i - lexema.Length);
                             lexema = "";
-                        }
+                            i--;
+                            columna--;
+                            estado = 0;
+                        }                       
                         break;
+
                     case 4:
                         if (c == '"')
                         {
@@ -278,99 +290,122 @@ namespace IDE
                             columna--;
                         }
                         break;
+
                     case 6:
                         if (c == '"')
                         {
                             lexema += c;
-                            //token = new Token(2, "Cadena", lexema, fila, columna);
-                            //tokens.add(token);
                             addToken(lexema, "Cadena", fila, columna, i - lexema.Length);
                             estado = 0;
                             lexema = "";
                         }
                         else if (c == ',')
                         {
-                            lexema += c;
-                            //token = new Token(4, "Coma", lexema, fila, columna);
-                            //tokens.add(token);
+                            lexema += c;                          
                             addToken(lexema, "Coma", fila, columna, i - lexema.Length);
                             estado = 0;
                             lexema = "";
                         }
-
                         break;
 
-                    /**inicio nuevo**/
+                    case 7:                     
+                            if (c == '<')
+                            {
+                                lexema += c;
+                                addToken(lexema, "Menor que", fila, columna, i);
+                                lexema = "";
+                            }
+                            else if (c == '>')
+                            {
+                                lexema += c;
+                                addToken(lexema, "Mayor que", fila, columna, i);
+                                estado = 0;
+                                lexema = "";
+                            }
+                            else if (c == '<' + '=')
+                            {
+                                lexema += c;
+                                addToken(lexema, "Menor o Igual que", fila, columna, i);
+                                lexema = "";
+                            }
+                            else if (c == '>' + '=')
+                            {
+                                lexema += c;
+                                addToken(lexema, "Mayor o igual que", fila, columna, i);
+                                lexema = "";
+                            }
+                            else if (c == '=' + '=')
+                            {
+                                lexema += c;
+                                addToken(lexema, "Igual", fila, columna, i);
+                                lexema = "";
+                            }
+                            else if (c == '!' + '=')
+                            {
+                                lexema += c;
+                                addToken(lexema, "Distinto", fila, columna, i);
+                                lexema = "";
+                            }
+                            else
+                            {
+                                addError(c.ToString(), "Desconocido", fila, columna);
+                                estado = -99;
+                                i--;
+                                columna--;
+                            }
+                        
+                            break;
+
+
                     case 8:
-                        if (Char.IsDigit(c))
+                        if (c == '!')
                         {
-                            estado = 9;
                             lexema += c;
-                        }
-                        else
-                        {
-                            //retorno += "Se esperaba un digito[" + caracter + "]" + Environment.NewLine;
-                            addError(lexema, "Se esperaba un digito [" + lexema + "]", fila, columna);
-                            estado = 0;
+                            addToken(lexema, "Operador not", fila, columna, i);
                             lexema = "";
                         }
-                        break;
-                    case 9:
-                        if (Char.IsDigit(c))
-                        {
-                            estado = 9;
-                            lexema += c;
-                        }
-                        else
-                        {
-                            //addToken(lexema, "decimal", pos + 1, 0);
-                            //estado = 0;
-                            //lexema = "";
-                            //pos -= 1;
-                            addToken(lexema, "Digito", fila, columna, i - lexema.Length);
-                            lexema = "";
-                            i--;
-                            columna--;
-                            estado = 0;
-                        }
-
-                        break;
-                    /*fin nuevo*/
-
-                    case 10:
-                        if (c == '+')
+                        else if (c == '|' + '|')
                         {
                             lexema += c;
-                            addToken(lexema, "Suma", fila, columna, i);
+                            addToken(lexema, "Operador Or", fila, columna, i);
                             lexema = "";
                         }
-                        else if (c == '-')
+                        else if (c == '&' + '&')
                         {
                             lexema += c;
-                            addToken(lexema, "Resta", fila, columna, i);
-                            lexema = "";
-                        }
-                        else if (c == '*')
-                        {
-                            lexema += c;
-                            addToken(lexema, "Multiplicacion", fila, columna, i);
-                            lexema = "";
-                        }
-                        else if (c == '/')
-                        {
-                            lexema += c;
-                            addToken(lexema, "Division", fila, columna, i);
+                            addToken(lexema, "Operador and", fila, columna, i);
                             lexema = "";
                         }
                         else
                         {
-                            addError(c.ToString() , "Desconocido", fila, columna);
+                            addError(c.ToString(), "Desconocido", fila, columna);
                             estado = -99;
                             i--;
                             columna--;
                         }
                         break;
 
+                    case 9:
+                        if (c == '=')
+                        {
+                            lexema += c;
+                            addToken(lexema, "igual", fila, columna, i);
+                            lexema = "";
+                        }
+                        else if (c == ';')
+                        {
+                            lexema += c;
+                            addToken(lexema, "Fin de Sentencia", fila, columna, i);
+                            lexema = "";
+                        }                       
+                        else
+                        {
+                            addError(c.ToString(), "Desconocido", fila, columna);
+                            estado = -99;
+                            i--;
+                            columna--;
+                        }
+                        break;
 
                     //estado de error.
                     case -99:
@@ -403,19 +438,13 @@ namespace IDE
             }
             return enco;
         }
-        /*verifica si es tipo*/
-
-
-
-
-
 
         public void generarLista()
         {
             for (int i = 0; i < listaTokens.Count; i++)
             {
                 Token actual = listaTokens.ElementAt(i);
-                retorno += "Lexema:" + actual.getLexema() + ",IdToken: " + actual.getIdToken() + ",Linea: " + actual.getLinea() + Environment.NewLine;
+                retorno += "Lexema: " + actual.getLexema() + ",IdToken: " + actual.getIdToken() + ",Linea: " + actual.getLinea() + Environment.NewLine;
             }
         }
         public String getRetorno()
