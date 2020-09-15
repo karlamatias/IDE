@@ -1,0 +1,10 @@
+C:\Users\USUARIO\source\repos\IDE2\IDE\IDE\bin\Debug\IDE.exe.config
+C:\Users\USUARIO\source\repos\IDE2\IDE\IDE\bin\Debug\IDE.exe
+C:\Users\USUARIO\source\repos\IDE2\IDE\IDE\bin\Debug\IDE.pdb
+C:\Users\USUARIO\source\repos\IDE2\IDE\IDE\obj\Debug\IDE.csprojAssemblyReference.cache
+C:\Users\USUARIO\source\repos\IDE2\IDE\IDE\obj\Debug\IDE.Form1.resources
+C:\Users\USUARIO\source\repos\IDE2\IDE\IDE\obj\Debug\IDE.Properties.Resources.resources
+C:\Users\USUARIO\source\repos\IDE2\IDE\IDE\obj\Debug\IDE.csproj.GenerateResource.cache
+C:\Users\USUARIO\source\repos\IDE2\IDE\IDE\obj\Debug\IDE.csproj.CoreCompileInputs.cache
+C:\Users\USUARIO\source\repos\IDE2\IDE\IDE\obj\Debug\IDE.exe
+C:\Users\USUARIO\source\repos\IDE2\IDE\IDE\obj\Debug\IDE.pdb
