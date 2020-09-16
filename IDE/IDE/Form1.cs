@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,11 +13,29 @@ namespace IDE
 {
     public partial class Form1 : Form
     {
+        string[] OpMatematicos = new string[] { "+", "-", "*", "/" };
+        string[] Variables = new string[] { "String", "int", "Double", "" };
+        string[] Operadores = new string[] { "||", "&&", "!", "(", ")", "<", ">", ">=", "<=", "==", "!=" };
+        string[] Asignacion_Final = new string[] { "=", ";" };
+        string[] Reservadas = new string[] { "if", "else if", "while" };
         static private List<Token> lis_toks;
+        int posicion = 0;
+
         public Form1()
         {
             InitializeComponent();
             Entrada.Enabled = false;
+            {
+                CambioColor();
+
+                this.Entrada.SelectionStart = this.Entrada.Text.Length;
+
+                this.Entrada.TextChanged += (ob, ev) =>
+                {
+                    posicion = Entrada.SelectionStart;
+                    CambioColor();
+                };
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,8 +47,7 @@ namespace IDE
 
             analiz.generarLista();
             Salida.Text = analiz.getRetorno();
-
-
+ 
             lis_toks = new List<Token>();
             lis_toks = analiz.getListaTokens();
 
@@ -81,5 +99,100 @@ namespace IDE
         {
             System.Environment.Exit(0);
         }
+
+        public void CambioColor() {
+
+            this.Entrada.Select(0, Entrada.Text.Length);
+            this.Entrada.SelectionColor = Color.Black;
+            this.Entrada.Select(posicion, 0);
+
+            string[] texto = Entrada.Text.Trim().Split(' ');
+            int inicio = 0;
+
+            foreach (string x in texto)
+            {
+                foreach (string y in Reservadas)
+                {
+                    if (x.Length != 0)
+                    {
+                        if (x.Trim().Equals(y))
+                        {
+                            inicio = this.Entrada.Text.IndexOf(x, inicio);
+                            this.Entrada.Select(inicio, x.Length);
+                            Entrada.SelectionColor = Color.Green;
+                            this.Entrada.Select(posicion, 0);
+                            inicio = inicio + 1;
+                        }
+                    }
+                }
+
+                foreach (string y in OpMatematicos)
+                {
+                    if (x.Length != 0)
+                    {
+                        if (x.Trim().Equals(y))
+                        {
+                            inicio = this.Entrada.Text.IndexOf(x, inicio);
+                            this.Entrada.Select(inicio, x.Length);
+                            Entrada.SelectionColor = Color.Blue;
+                            this.Entrada.Select(posicion, 0);
+                            inicio = inicio + 1;
+                        }
+                    }
+                }
+
+                foreach (string y in Operadores)
+                {
+                    if (x.Length != 0)
+                    {
+                        if (x.Trim().Equals(y))
+                        {
+                            inicio = this.Entrada.Text.IndexOf(x, inicio);
+                            this.Entrada.Select(inicio, x.Length);
+                            Entrada.SelectionColor = Color.Blue;
+                            this.Entrada.Select(posicion, 0);
+                            inicio = inicio + 1;
+                        }
+                    }
+                }
+
+                foreach (string y in Asignacion_Final)
+                {
+                    if (x.Length != 0)
+                    {
+                        if (x.Trim().Equals(y))
+                        {
+                            inicio = this.Entrada.Text.IndexOf(x, inicio);
+                            this.Entrada.Select(inicio, x.Length);
+                            Entrada.SelectionColor = Color.Fuchsia;
+                            this.Entrada.Select(posicion, 0);
+                            inicio = inicio + 1;
+                        }
+                    }
+                }
+
+
+
+
+
+
+
+
+            }//x
+        
+
+
+
+
+
+
+
+
+
+
+
+    } //Cierra CambioColor
     }
-}
+
+    }
+

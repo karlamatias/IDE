@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,9 @@ namespace IDE
         private int linea;
         private int columna;
         private int indice;
-        public Token(String lexema, String idToken, int linea, int columna, int indice)
+        private Color color;
+
+        public Token(String lexema, String idToken, int linea, int columna, int indice, Color color)
         {
 
             this.lexema = lexema;
@@ -21,6 +24,7 @@ namespace IDE
             this.linea = linea;
             this.columna = columna;
             this.indice = indice;
+            this.color = color;
         }
 
         public int getIndice()
@@ -43,5 +47,10 @@ namespace IDE
         {
             return this.columna;
         }
+
+        public Color getcolor() {
+            return this.color;
+        }
+
     }
 }

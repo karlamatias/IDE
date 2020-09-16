@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,10 +39,10 @@ namespace IDE
 
         }
 
-        public void addToken(String lexema, String idToken, int linea, int columna, int indice)
+        public void addToken(String lexema, String idToken, int linea, int columna, int indice, Color color)
         {
             //MessageBox.Show("*" + lexema + "* lin: " + linea + " col: " + columna, "Lexema_final");
-            Token nuevo = new Token(lexema, idToken, linea, columna, indice);
+            Token nuevo = new Token(lexema, idToken, linea, columna, indice, color);
             listaTokens.Add(nuevo);
         }
 
@@ -109,26 +110,26 @@ namespace IDE
                             lexema += c;
                             ////addToken(lexema, "llaveIzq", pos + 1, 0);
 
-                            addToken(lexema, "llaveIzq", fila, columna, i - lexema.Length);
+                            addToken(lexema, "llaveIzq", fila, columna, i - lexema.Length, Color.Azure);
                             lexema = "";
                         }
                         else if (c == '}')
                         {
                             lexema += c;
-                            addToken(lexema, "llaveDer", fila, columna, i - lexema.Length);
+                            addToken(lexema, "llaveDer", fila, columna, i - lexema.Length, Color.Azure);
                             ////addToken(lexema, "llaveDer", pos + 1, 0);
                             lexema = "";
                         }
                         else if (c == '(')
                         {
                             lexema += c;
-                            addToken(lexema, "parIzq", fila, columna, i - lexema.Length);
+                            addToken(lexema, "parIzq", fila, columna, i - lexema.Length, Color.Blue);
                             lexema = "";
                         }
                         else if (c == ')')
                         {
                             lexema += c;
-                            addToken(lexema, "parDer", fila, columna, i - lexema.Length);
+                            addToken(lexema, "parDer", fila, columna, i - lexema.Length, Color.Blue);
                             lexema = "";
                         }
                         else if (c == ',')
@@ -140,27 +141,27 @@ namespace IDE
                         else if (c == ';')
                         {
                             lexema += c;
-                            addToken(lexema, "Final Sentencia", fila, columna, i - lexema.Length);
+                            addToken(lexema, "Final Sentencia", fila, columna, i - lexema.Length, Color.Fuchsia);
                             lexema = "";
                         }
 
                         else if (c == '<')
                         {
                             lexema += c;
-                            addToken(lexema, "Menor", fila, columna, i - lexema.Length);
+                            addToken(lexema, "Menor", fila, columna, i - lexema.Length, Color.Blue);
                             lexema = "";
                         }
                         else if (c == '>')
                         {
                             lexema += c;
-                            addToken(lexema, "Mayor", fila, columna, i - lexema.Length);
+                            addToken(lexema, "Mayor", fila, columna, i - lexema.Length, Color.Blue);
                             lexema = "";
                         }
 
                         else if (c == '.')
                         {
                             lexema += c;
-                            addToken(lexema, "Punto", fila, columna, i - lexema.Length);
+                            addToken(lexema, "Punto", fila, columna, i - lexema.Length, Color.Blue);
                             lexema = "";
                         }
 
@@ -169,25 +170,26 @@ namespace IDE
                         else if (c == '+')
                         {
                             lexema += c;
-                            addToken(lexema, "Suma", fila, columna, i);
+                            addToken(lexema, "Suma", fila, columna, i, Color.Blue);
                             lexema = "";
+
                         }
                         else if (c == '-')
                         {
                             lexema += c;
-                            addToken(lexema, "Menos", fila, columna, i);
+                            addToken(lexema, "Menos", fila, columna, i, Color.Blue);
                             lexema = "";
                         }
                         else if (c == '*')
                         {
                             lexema += c;
-                            addToken(lexema, "Multiplicacion", fila, columna, i);
+                            addToken(lexema, "Multiplicacion", fila, columna, i, Color.Blue);
                             lexema = "";
                         }
                         else if (c == '/')
                         {
                             lexema += c;
-                            addToken(lexema, "Division", fila, columna, i);
+                            addToken(lexema, "Division", fila, columna, i, Color.Blue);
                             lexema = "";
                         }
 
@@ -217,11 +219,11 @@ namespace IDE
                             encontrado = Macht_enReser(lexema);
                             if (encontrado)
                             {
-                                addToken(lexema, "Reservada", fila, columna, i - lexema.Length);
+                                addToken(lexema, "Reservada", fila, columna, i - lexema.Length, Color.Green);
                             }
                             else
                             {
-                                addToken(lexema, "Identificador", fila, columna, i - lexema.Length);
+                                addToken(lexema, "Identificador", fila, columna, i - lexema.Length, Color.BlueViolet);
 
                             }
 
@@ -245,7 +247,7 @@ namespace IDE
                         }
                         else
                         {
-                            addToken(lexema, "Entero", fila, columna, i - lexema.Length);
+                            addToken(lexema, "Entero", fila, columna, i - lexema.Length, Color.Magenta);
                             lexema = "";
                             i--;
                             columna--;
@@ -262,7 +264,7 @@ namespace IDE
                         }
                         else
                         {
-                            addToken(lexema, "Decimal", fila, columna, i - lexema.Length);
+                            addToken(lexema, "Decimal", fila, columna, i - lexema.Length, Color.Cyan);
                             lexema = "";
                             i--;
                             columna--;
@@ -295,109 +297,38 @@ namespace IDE
                         if (c == '"')
                         {
                             lexema += c;
-                            addToken(lexema, "Cadena", fila, columna, i - lexema.Length);
+                            addToken(lexema, "Cadena", fila, columna, i - lexema.Length, Color.Gray);
                             estado = 0;
                             lexema = "";
                         }
                         else if (c == ',')
                         {
                             lexema += c;                          
-                            addToken(lexema, "Coma", fila, columna, i - lexema.Length);
+                            addToken(lexema, "Coma", fila, columna, i - lexema.Length, Color.Fuchsia);
                             estado = 0;
                             lexema = "";
                         }
-                        break;
-
-                    case 7:                     
-                            if (c == '<')
-                            {
-                                lexema += c;
-                                addToken(lexema, "Menor que", fila, columna, i);
-                                lexema = "";
-                            }
-                            else if (c == '>')
-                            {
-                                lexema += c;
-                                addToken(lexema, "Mayor que", fila, columna, i);
-                                estado = 0;
-                                lexema = "";
-                            }
-                            else if (c == '<' + '=')
-                            {
-                                lexema += c;
-                                addToken(lexema, "Menor o Igual que", fila, columna, i);
-                                lexema = "";
-                            }
-                            else if (c == '>' + '=')
-                            {
-                                lexema += c;
-                                addToken(lexema, "Mayor o igual que", fila, columna, i);
-                                lexema = "";
-                            }
-                            else if (c == '=' + '=')
-                            {
-                                lexema += c;
-                                addToken(lexema, "Igual", fila, columna, i);
-                                lexema = "";
-                            }
-                            else if (c == '!' + '=')
-                            {
-                                lexema += c;
-                                addToken(lexema, "Distinto", fila, columna, i);
-                                lexema = "";
-                            }
-                            else
-                            {
-                                addError(c.ToString(), "Desconocido", fila, columna);
-                                estado = -99;
-                                i--;
-                                columna--;
-                            }
-                        
-                            break;
-
+                        break;   
 
                     case 8:
                         if (c == '!')
                         {
                             lexema += c;
-                            addToken(lexema, "Operador not", fila, columna, i);
+                            addToken(lexema, "Operador not", fila, columna, i, Color.Blue);
                             lexema = "";
                         }
                         else if (c == '|' + '|')
                         {
                             lexema += c;
-                            addToken(lexema, "Operador Or", fila, columna, i);
+                            addToken(lexema, "Operador Or", fila, columna, i, Color.Blue);
                             lexema = "";
                         }
                         else if (c == '&' + '&')
                         {
                             lexema += c;
-                            addToken(lexema, "Operador and", fila, columna, i);
+                            addToken(lexema, "Operador and", fila, columna, i, Color.Blue);
                             lexema = "";
                         }
-                        else
-                        {
-                            addError(c.ToString(), "Desconocido", fila, columna);
-                            estado = -99;
-                            i--;
-                            columna--;
-                        }
-                        break;
-
-                    case 9:
-                        if (c == '=')
-                        {
-                            lexema += c;
-                            addToken(lexema, "igual", fila, columna, i);
-                            lexema = "";
-                        }
-                        else if (c == ';')
-                        {
-                            lexema += c;
-                            addToken(lexema, "Fin de Sentencia", fila, columna, i);
-                            lexema = "";
-                        }                       
                         else
                         {
                             addError(c.ToString(), "Desconocido", fila, columna);
