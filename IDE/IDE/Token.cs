@@ -14,9 +14,8 @@ namespace IDE
         private int linea;
         private int columna;
         private int indice;
-        private Color color;
 
-        public Token(String lexema, String idToken, int linea, int columna, int indice, Color color)
+        public Token(String lexema, String idToken, int linea, int columna, int indice)
         {
 
             this.lexema = lexema;
@@ -24,7 +23,6 @@ namespace IDE
             this.linea = linea;
             this.columna = columna;
             this.indice = indice;
-            this.color = color;
         }
 
         public int getIndice()
@@ -48,9 +46,6 @@ namespace IDE
             return this.columna;
         }
 
-        public Color getcolor() {
-            return this.color;
-        }
 
     }
 }

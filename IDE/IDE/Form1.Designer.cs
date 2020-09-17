@@ -41,6 +41,7 @@
             this.Errores = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.tablaErrores = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +52,7 @@
             this.salirToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(816, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -68,21 +69,21 @@
             // nuevoProyectoToolStripMenuItem
             // 
             this.nuevoProyectoToolStripMenuItem.Name = "nuevoProyectoToolStripMenuItem";
-            this.nuevoProyectoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevoProyectoToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.nuevoProyectoToolStripMenuItem.Text = "Nuevo Proyecto ";
             this.nuevoProyectoToolStripMenuItem.Click += new System.EventHandler(this.nuevoProyectoToolStripMenuItem_Click);
             // 
             // abrirProyectoToolStripMenuItem
             // 
             this.abrirProyectoToolStripMenuItem.Name = "abrirProyectoToolStripMenuItem";
-            this.abrirProyectoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abrirProyectoToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.abrirProyectoToolStripMenuItem.Text = "Abrir Proyecto";
             this.abrirProyectoToolStripMenuItem.Click += new System.EventHandler(this.abrirProyectoToolStripMenuItem_Click);
             // 
             // guardarProyectoToolStripMenuItem
             // 
             this.guardarProyectoToolStripMenuItem.Name = "guardarProyectoToolStripMenuItem";
-            this.guardarProyectoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.guardarProyectoToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.guardarProyectoToolStripMenuItem.Text = "Guardar Proyecto";
             this.guardarProyectoToolStripMenuItem.Click += new System.EventHandler(this.guardarProyectoToolStripMenuItem_Click);
             // 
@@ -116,9 +117,9 @@
             // 
             // Salida
             // 
-            this.Salida.Location = new System.Drawing.Point(12, 350);
+            this.Salida.Location = new System.Drawing.Point(556, 41);
             this.Salida.Name = "Salida";
-            this.Salida.Size = new System.Drawing.Size(776, 79);
+            this.Salida.Size = new System.Drawing.Size(248, 277);
             this.Salida.TabIndex = 3;
             this.Salida.Text = "";
             // 
@@ -135,11 +136,20 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // tablaErrores
+            // 
+            this.tablaErrores.Location = new System.Drawing.Point(15, 342);
+            this.tablaErrores.Name = "tablaErrores";
+            this.tablaErrores.Size = new System.Drawing.Size(760, 86);
+            this.tablaErrores.TabIndex = 5;
+            this.tablaErrores.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(816, 450);
+            this.Controls.Add(this.tablaErrores);
             this.Controls.Add(this.Errores);
             this.Controls.Add(this.Salida);
             this.Controls.Add(this.button1);
@@ -169,6 +179,7 @@
         private System.Windows.Forms.Label Errores;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.RichTextBox tablaErrores;
     }
 }
 
