@@ -15,19 +15,22 @@ namespace IDE
     {
         string[] OpMatematicos = new string[] { "+", "-", "*", "/" };
         string[] VariableString = new string[] { "String" };
-        string[] VariableInt = new string[] { "int" + "" };
+        string[] VariableInt = new string[]{"int" };  
         string[] VariableDouble = new string[] { "Double" + "" };
         string[] Operadores = new string[] { "||", "&&", "!", "(", ")", "<", ">", ">=", "<=", "==", "!=" };
         string[] Asignacion_Final = new string[] { "=", ";" };
         string[] Reservadas = new string[] { "if", "else if", "while" };
         static private List<Token> lis_toks;
-        static private List<ErroresToken> lis_errores;
+
         int posicion = 0;
+        private int numero;
 
         public Form1()
         {
             InitializeComponent();
             Entrada.Enabled = false;
+            Salida.Enabled = false;
+            tablaErrores.Enabled = false;
             //cambio de color a la hora de ingresar el texto 
             {
                 CambioColor();
@@ -51,33 +54,31 @@ namespace IDE
             Salida.Text = analiz.getRetorno();
 
             analiz.generarListaErrores();
-            tablaErrores.Text = analiz.getRetorno();
+            tablaErrores.Text = analiz.getRetornoErrores();
 
             lis_toks = new List<Token>();
             lis_toks = analiz.getListaTokens();
 
-            lis_errores = new List<ErroresToken>();
-            lis_errores = analiz.getListaErrores();
 
             for (int i = 0; i < lis_toks.Count; i++)
             {
                 Token actual = lis_toks.ElementAt(i);
-                //MessageBox.Show("[Lexema:" + actual.getLexema() + ",IdToken: " + actual.getIdToken() + ",Linea: " + actual.getLinea() + "]", "des");
+                
 
             }
 
-            /*for (int i = 0; i < lis_errores.Count; i++)
-            {
-                ErroresToken actual = lis_errores.ElementAt(i);
-                MessageBox.Show("[Lexema:" + actual.getLexema() + ",IdToken: " + actual.getIdToken() + ",Linea: " + actual.getLinea() + "]", "des");
-            }
-            */
 
         }
+
+        
+
+
 
         private void nuevoProyectoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Entrada.Enabled = true;
+            Salida.Enabled = true;
+            tablaErrores.Enabled = true;
             Entrada.Clear();
             Salida.Clear();
         }
@@ -212,15 +213,28 @@ namespace IDE
                     }
                 }
 
+                foreach (string y in VariableInt)
+                {
 
-
-
+                    if (x.Length != 0)
+                    {
+                        if (x.Trim().Equals(y))
+                        {
+                            inicio = this.Entrada.Text.IndexOf(x, inicio);
+                            this.Entrada.Select(inicio, x.Length);
+                            Entrada.SelectionColor = Color.Purple;
+                            this.Entrada.Select(posicion, 0);
+                            inicio = inicio + 1;
+                        }
+                    }
+                }
 
 
             }//x
         
 
             } //Cierra CambioColor
+
         }
 
     }

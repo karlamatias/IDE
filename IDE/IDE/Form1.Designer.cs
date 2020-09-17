@@ -47,6 +47,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.GrayText;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
             this.salirToolStripMenuItem});
@@ -96,6 +97,7 @@
             // 
             // Entrada
             // 
+            this.Entrada.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.Entrada.Location = new System.Drawing.Point(12, 41);
             this.Entrada.Name = "Entrada";
             this.Entrada.Size = new System.Drawing.Size(538, 277);
@@ -117,6 +119,7 @@
             // 
             // Salida
             // 
+            this.Salida.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.Salida.Location = new System.Drawing.Point(556, 41);
             this.Salida.Name = "Salida";
             this.Salida.Size = new System.Drawing.Size(248, 277);
@@ -148,6 +151,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(816, 450);
             this.Controls.Add(this.tablaErrores);
             this.Controls.Add(this.Errores);
