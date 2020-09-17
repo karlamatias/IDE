@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,14 +17,14 @@ namespace IDE
         string[] OpMatematicos = new string[] { "+", "-", "*", "/" };
         string[] VariableString = new string[] { "String" };
         string[] VariableInt = new string[]{"int" };  
-        string[] VariableDouble = new string[] { "Double" + "" };
+        string[] VariableDouble = new string[] { "Double"  };
         string[] Operadores = new string[] { "||", "&&", "!", "(", ")", "<", ">", ">=", "<=", "==", "!=" };
         string[] Asignacion_Final = new string[] { "=", ";" };
-        string[] Reservadas = new string[] { "if", "else if", "while" };
+        string[] Reservadas = new string[] { "if", "else if", "while", "switch", "case" };
         static private List<Token> lis_toks;
 
         int posicion = 0;
-        private int numero;
+        
 
         public Form1()
         {
@@ -70,9 +71,6 @@ namespace IDE
 
         }
 
-        
-
-
 
         private void nuevoProyectoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -81,11 +79,18 @@ namespace IDE
             tablaErrores.Enabled = true;
             Entrada.Clear();
             Salida.Clear();
+            tablaErrores.Clear();
         }
 
         private void abrirProyectoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "rich text box(*.gtE) | *.gtE";
+            Entrada.Enabled = true;
+            Salida.Enabled = true;
+            tablaErrores.Enabled = true;
+            Entrada.Clear();
+            Salida.Clear();
+            tablaErrores.Clear();
+            openFileDialog1.Filter = "rich text box(*.txt) | *.txt";
             openFileDialog1.FileName = "";
             openFileDialog1.FilterIndex = 2;
             openFileDialog1.InitialDirectory = "Escritorio";
@@ -111,7 +116,7 @@ namespace IDE
 
         private void guardarProyectoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.Filter = "rich text box(*.gtE) | *.gtE";
+            saveFileDialog1.Filter = "rich text box(*.txt) | *.txt";
             saveFileDialog1.OverwritePrompt = true;
             saveFileDialog1.Title = "Save File";
 
@@ -206,7 +211,7 @@ namespace IDE
                         {
                             inicio = this.Entrada.Text.IndexOf(x, inicio);
                             this.Entrada.Select(inicio, x.Length);
-                            Entrada.SelectionColor = Color.Fuchsia;
+                            Entrada.SelectionColor = Color.Gray;
                             this.Entrada.Select(posicion, 0);
                             inicio = inicio + 1;
                         }
@@ -235,7 +240,30 @@ namespace IDE
 
             } //Cierra CambioColor
 
+        private void exportarErroresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            SaveFileDialog guardar = new SaveFileDialog();
+            guardar.Filter = "rich text box(*.gtE) | .gtE";
+            guardar.Title = "Exportar Errores";
+            var resultado = guardar.ShowDialog();
+
+            if(resultado == DialogResult.OK)
+            {
+                StreamWriter escribir = new StreamWriter(guardar.FileName);
+                foreach (object line in tablaErrores.Lines)
+                {
+                    escribir.WriteLine(line);
+
+                }
+                escribir.Close();
+                MessageBox.Show("Archivo Guardado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+
+
         }
+    }
 
     }
 

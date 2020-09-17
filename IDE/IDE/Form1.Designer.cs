@@ -42,6 +42,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.tablaErrores = new System.Windows.Forms.RichTextBox();
+            this.exportarErroresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +63,8 @@
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nuevoProyectoToolStripMenuItem,
             this.abrirProyectoToolStripMenuItem,
-            this.guardarProyectoToolStripMenuItem});
+            this.guardarProyectoToolStripMenuItem,
+            this.exportarErroresToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.archivoToolStripMenuItem.Text = "Archivo";
@@ -70,21 +72,21 @@
             // nuevoProyectoToolStripMenuItem
             // 
             this.nuevoProyectoToolStripMenuItem.Name = "nuevoProyectoToolStripMenuItem";
-            this.nuevoProyectoToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.nuevoProyectoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nuevoProyectoToolStripMenuItem.Text = "Nuevo Proyecto ";
             this.nuevoProyectoToolStripMenuItem.Click += new System.EventHandler(this.nuevoProyectoToolStripMenuItem_Click);
             // 
             // abrirProyectoToolStripMenuItem
             // 
             this.abrirProyectoToolStripMenuItem.Name = "abrirProyectoToolStripMenuItem";
-            this.abrirProyectoToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.abrirProyectoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.abrirProyectoToolStripMenuItem.Text = "Abrir Proyecto";
             this.abrirProyectoToolStripMenuItem.Click += new System.EventHandler(this.abrirProyectoToolStripMenuItem_Click);
             // 
             // guardarProyectoToolStripMenuItem
             // 
             this.guardarProyectoToolStripMenuItem.Name = "guardarProyectoToolStripMenuItem";
-            this.guardarProyectoToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.guardarProyectoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.guardarProyectoToolStripMenuItem.Text = "Guardar Proyecto";
             this.guardarProyectoToolStripMenuItem.Click += new System.EventHandler(this.guardarProyectoToolStripMenuItem_Click);
             // 
@@ -147,6 +149,13 @@
             this.tablaErrores.TabIndex = 5;
             this.tablaErrores.Text = "";
             // 
+            // exportarErroresToolStripMenuItem
+            // 
+            this.exportarErroresToolStripMenuItem.Name = "exportarErroresToolStripMenuItem";
+            this.exportarErroresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportarErroresToolStripMenuItem.Text = "Exportar Errores";
+            this.exportarErroresToolStripMenuItem.Click += new System.EventHandler(this.exportarErroresToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -184,6 +193,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.RichTextBox tablaErrores;
+        private System.Windows.Forms.ToolStripMenuItem exportarErroresToolStripMenuItem;
     }
 }
 

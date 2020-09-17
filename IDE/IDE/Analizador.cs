@@ -323,7 +323,7 @@ namespace IDE
             for (int i = 0; i < listaTokens.Count; i++)
             {
                 Token actual = listaTokens.ElementAt(i);
-                retorno += "Lexema: " + actual.getLexema() + ",IdToken: " + actual.getIdToken() + ",Linea: " + actual.getLinea() + Environment.NewLine;
+                retorno += "Lexema: " + actual.getLexema() + ", IdToken: " + actual.getIdToken() + ", Linea: " + actual.getLinea() + Environment.NewLine;
             }
         }
 
@@ -332,7 +332,7 @@ namespace IDE
             for (int i = 0; i < listaErrores.Count; i++)
             {
                 ErroresToken actual = listaErrores.ElementAt(i);
-                retornoErrores += "Lexema: " + actual.getLexema() + ",IdToken: " + actual.getIdToken() + ",Linea: " + actual.getLinea() + Environment.NewLine;
+                retornoErrores += "Lexema: " + actual.getLexema() + ", IdToken: " + actual.getIdToken() + ", Linea: " + actual.getLinea() + Environment.NewLine;
             }
         }
 
