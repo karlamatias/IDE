@@ -14,6 +14,7 @@ namespace IDE
 {
     public partial class Form1 : Form
     {
+        //declaro las variables para cambiar el color segun sea el caso 
         string[] OpMatematicos = new string[] { "+", "-", "*", "/" };
         string[] VariableString = new string[] { "String" };
         string[] VariableInt = new string[]{"int" };  
@@ -64,11 +65,8 @@ namespace IDE
             for (int i = 0; i < lis_toks.Count; i++)
             {
                 Token actual = lis_toks.ElementAt(i);
-                
 
             }
-
-
         }
 
 
