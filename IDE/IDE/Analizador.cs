@@ -17,7 +17,8 @@ namespace IDE
         private String retorno;
         private String retornoErrores;
         public int estado_token;
-
+        Char c;
+        Color colores;
         //errores tokens
         static private List<ErroresToken> listaErrores;
 
@@ -48,15 +49,15 @@ namespace IDE
 
         public void Analizador_cadena(String entrada)
         {
+           
             int estado = 0;
-            int columna = 0;
+            int columna = 1;
             int fila = 1;
             string lexema = "";
-            Char c;
 
             entrada = entrada + " ";
-
-            for (int i = 0; i < entrada.Length; i++)
+  
+                for (int i = 0; i < entrada.Length; i++)
             {
                 c = entrada[i];
                 columna++;
@@ -241,6 +242,7 @@ namespace IDE
                     case 3:
                         if (Char.IsDigit(c))
                         {
+                            
                             estado = 3;
                             lexema += c;
                         }
@@ -248,6 +250,7 @@ namespace IDE
                         {
                             addToken(lexema, "Decimal", fila, columna, i - lexema.Length);
                             lexema = "";
+                            colores = Color.Cyan;
                             i--;
                             columna--;
                             estado = 0;
@@ -280,9 +283,9 @@ namespace IDE
                         if (c == '"')
                         {
                             lexema += c;
-                            addToken(lexema, "Cadena", fila, columna, i - lexema.Length);
-                            estado = 0;
+                            addToken(lexema, "Cadena", fila, columna, i - lexema.Length); 
                             lexema = "";
+                            colores = Color.Gray;
                         }
                         break;   
 
@@ -318,21 +321,23 @@ namespace IDE
             return enco;
         }
 
+
         public void generarLista()
         {
             for (int i = 0; i < listaTokens.Count; i++)
             {
                 Token actual = listaTokens.ElementAt(i);
-                retorno += "Lexema: " + actual.getLexema() + ", IdToken: " + actual.getIdToken() + ", Linea: " + actual.getLinea() + Environment.NewLine;
+                retorno += "Lexema: " + actual.getLexema() + ", IdToken: " + actual.getIdToken() + ", Linea: " + actual.getLinea() + ", columna: " + actual.getColumna() + Environment.NewLine;
+ 
             }
         }
 
-        public void generarListaErrores()
+       public void generarListaErrores()
         {
             for (int i = 0; i < listaErrores.Count; i++)
             {
                 ErroresToken actual = listaErrores.ElementAt(i);
-                retornoErrores += "Lexema: " + actual.getLexema() + ", IdToken: " + actual.getIdToken() + ", Linea: " + actual.getLinea() + Environment.NewLine;
+                retornoErrores += "Lexema: " + actual.getLexema() + ", IdToken: " + actual.getIdToken() + ", Linea: " + actual.getLinea() + ", columna: " + actual.getColumna() + Environment.NewLine;
             }
         }
 

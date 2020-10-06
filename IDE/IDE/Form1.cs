@@ -14,14 +14,18 @@ namespace IDE
 {
     public partial class Form1 : Form
     {
+
         //declaro las variables para cambiar el color segun sea el caso 
-        string[] OpMatematicos = new string[] { "+", "-", "*", "/" };
-        string[] VariableString = new string[] { "String" };
-        string[] VariableInt = new string[]{"int" };  
-        string[] VariableDouble = new string[] { "Double"  };
-        string[] Operadores = new string[] { "||", "&&", "!", "(", ")", "<", ">", ">=", "<=", "==", "!=" };
-        string[] Asignacion_Final = new string[] { "=", ";" };
-        string[] Reservadas = new string[] { "if", "else if", "while", "switch", "case" };
+        string[] OpMatematicos = new string[] { "+" , "-" , "*" , "/" , "--" , "++" };
+        string[] VariableString = new string[] { "cadena" };
+        string[] VariableInt = new string[]{ "entero" };  
+        string[] VariableDouble = new string[] { "decimal" };
+        string[] VariableBoolean = new string[] { "booleano" };
+        string[] VariableChar = new string[] { "caracter" };
+        string[] Operadores = new string[] { "||" , "&&" , "!" , "(" , ")" , "<" , ">" , ">=" , "<=" , "==" , "!="};
+        string[] Asignacion_Final = new string[] { "=" , ";"};
+        string[] Comentarios = new string[] { "//" , "/*" , "*/"};
+        string[] Reservadas = new string[] { "SI" , "SINO" , "SINO_SI" , "MIENTRAS" , "HACER" , "DESDE" , "HASTA" , "INCREMENTO"};
         static private List<Token> lis_toks;
 
         int posicion = 0;
@@ -65,7 +69,7 @@ namespace IDE
             for (int i = 0; i < lis_toks.Count; i++)
             {
                 Token actual = lis_toks.ElementAt(i);
-
+                
             }
         }
 
@@ -232,6 +236,69 @@ namespace IDE
                     }
                 }
 
+                foreach (string y in VariableDouble)
+                {
+
+                    if (x.Length != 0)
+                    {
+                        if (x.Trim().Equals(y))
+                        {
+                            inicio = this.Entrada.Text.IndexOf(x, inicio);
+                            this.Entrada.Select(inicio, x.Length);
+                            Entrada.SelectionColor = Color.Cyan;
+                            this.Entrada.Select(posicion, 0);
+                            inicio = inicio + 1;
+                        }
+                    }
+                }
+
+                foreach (string y in VariableBoolean)
+                {
+
+                    if (x.Length != 0)
+                    {
+                        if (x.Trim().Equals(y))
+                        {
+                            inicio = this.Entrada.Text.IndexOf(x, inicio);
+                            this.Entrada.Select(inicio, x.Length);
+                            Entrada.SelectionColor = Color.Orange;
+                            this.Entrada.Select(posicion, 0);
+                            inicio = inicio + 1;
+                        }
+                    }
+                }
+
+                foreach (string y in VariableChar)
+                {
+
+                    if (x.Length != 0)
+                    {
+                        if (x.Trim().Equals(y))
+                        {
+                            inicio = this.Entrada.Text.IndexOf(x, inicio);
+                            this.Entrada.Select(inicio, x.Length);
+                            Entrada.SelectionColor = Color.Maroon;
+                            this.Entrada.Select(posicion, 0);
+                            inicio = inicio + 1;
+                        }
+                    }
+                }
+
+                foreach(string y in Comentarios)
+                {
+
+                    if (x.Length != 0)
+                    {
+                        if (x.Trim().Equals(y))
+                        {
+                            inicio = this.Entrada.Text.IndexOf(x, inicio);
+                            this.Entrada.Select(inicio, x.Length);
+                            Entrada.SelectionColor = Color.Red;
+                            this.Entrada.Select(posicion, 0);
+                            inicio = inicio + 1;
+                        }
+                    }
+                }
 
             }//x
         
