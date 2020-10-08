@@ -195,11 +195,11 @@ namespace IDE
                         }
                         else
                         {
-                            Boolean encontrado = false;
+                            Boolean sente = true;
                             
                             {
-                                encontrado = Reservada(lexema);
-                                if (encontrado)
+                                sente = Reservada(lexema);
+                                if (sente)
                                 {
                                     addToken(lexema, "Reservada", fila, columna, i - lexema.Length);
                                 }
@@ -305,20 +305,56 @@ namespace IDE
 
         public Boolean Reservada(String sente)
         {
-            Boolean enco = false;
-            for (int i = 0; i < tokens.Count; ++i)
+            sente = sente.ToUpper();
+            if (sente.Equals("Principal ()") || sente.Equals("PRINCIPAL ()"))
             {
-
-                if (sente.ToString() == tokens[i].ToString())
-                {
-                    enco = true;
-                    estado_token = i;
-                    return enco;
-                }
-                else { enco = false; }
-
+                return true;
             }
-            return enco;
+            if (sente.Equals("entero") || sente.Equals("ENTERO"))
+            {
+                return true;
+            }
+            if (sente.Equals("cadena") || sente.Equals("CADENA"))
+            {
+                return true;
+            }
+            if (sente.Equals("decimal") || sente.Equals("DECIMAL"))
+            {
+                return true;
+            }
+            if (sente.Equals("caracter") || sente.Equals("CARACTER"))
+            {
+                return true;
+            }
+            if (sente.Equals("booleano") || sente.Equals("BOOLEANO"))
+            {
+                return true;
+            }
+            if (sente.Equals("SI") || sente.Equals("si"))
+            {
+                return true;
+            }
+            if (sente.Equals("SINO_SI") || sente.Equals("sino_si"))
+            {
+                return true;
+            }
+            if (sente.Equals("SINO") || sente.Equals("sino"))
+            {
+                return true;
+            }
+            if (sente.Equals("MIENTRAS") || sente.Equals("mientras"))
+            {
+                return true;
+            }
+            if (sente.Equals("HACER") || sente.Equals("hacer"))
+            {
+                return true;
+            }
+            if (sente.Equals("INCREMENTO") || sente.Equals("incremento"))
+            {
+                return true;
+            }
+            return false;
         }
 
 

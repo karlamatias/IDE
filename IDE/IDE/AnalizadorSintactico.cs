@@ -22,150 +22,143 @@ namespace IDE
             for (int i = 0; i < datos.Length; i++)
             {
                 Boolean tradu = false;
-                String valor = datos[i].ToString().ToUpper();
+                String valor = datos[i].ToString();
 
                 if (!valor.Equals("Principal ()") && i == 0)
                 {
                     errores += "Falta metodo inicial. Se esperaba Principal () \n";
                 }
-                 if (i == 0) {
-                    produccion++;
-                    tradu = true;
-                }
 
-
-
-
-                /*if (!valor.Equals("Principal") && i == 0)
+               else if (i == 0)
                 {
-                    errores += "Se esperaba Principal \n";
-                }
-                 if (i == 0) {
                     produccion++;
                     tradu = true;
                 }
+  
                 //validacion de variable 
-                if (valor.Contains("entero") || valor.Contains("cadena") || valor.Contains("booleano") || valor.Contains("decimal") || valor.Contains("caracter") && !valor.Contains("Funciones")) {
+                if (valor.Contains("entero") || valor.Contains("cadena") || valor.Contains("booleano") || valor.Contains("decimal") || valor.Contains("caracter") && !valor.Contains("SI"))
+                {
                     try
                     {
                         int inicioval = 0;
-                        int inicioval2 = fin(datos[i], ":");
+                        int inicioval2 = fin(datos[i], "=");
                         string ident = datos[i].Substring((inicioval), (inicioval2));
                         if (lexico.Reservada(ident.Trim()))
                         {
                             errores += "Se esperaba un identificador \n";
 
+                            }
+
+                        string tipo = "";
+                        if (valor.Contains("entero"))
+                        {
+                            tipo = "Int";
                         }
+                        else if (valor.Contains("cadena"))
+                        {
+                            tipo = "String";
+                        }
+                        else if (valor.Contains("booleano"))
+                        {
+                            tipo = "Boolean";
+                        }
+                        else if (valor.Contains("decimal"))
+                        {
+                            tipo = "Decimal";
 
+                        }
+                        else if (valor.Contains("Caracter"))
+                        {
+                            tipo = "Char";
+                        }
+                        tradu = true;
+                }
 
-
-                    }
-                    catch (Exception e) {
-                        errores += "Error de gramatica de variable " + datos[i] + "\n";  
+                    catch (Exception e)
+                    {
+                        errores += "Error de gramatica de variable " + datos[i] + "\n";
                     }
 
                 }
-                if (valor.Contains("Funciones")) {
+
+                if (valor.Contains("SI"))
+                {
                     try
                     {
-                        int inicioval = inicio(datos[i], "");
+                        int inicioval = 0;
                         int inicioval2 = fin(datos[i], "(");
                         //nombre que se le dara al metodo 
                         string ident = datos[i].Substring((inicioval), (inicioval2));
                         if (lexico.Reservada(ident.Trim()))
                         {
-                            errores += "Se esperaba un identificador \n";
+                            errores += "Se esperaba Parentesis \n";
 
                         }
-                        string tipo = "principal";
-                        if (valor.Contains("( : cadena") || valor.Contains(" ) : cadena "))
-                        {
-                            tipo = "String";
-                        }
-                        else if (valor.Contains("( : entero ") || valor.Contains(") : entero"))
-                        {
-                            tipo = "Int";  
-                        }
+                        
                         string llave = "";
-                        if (valor.Trim().Contains("{")) {
+                        if (valor.Trim().Contains("{"))
+                        {
                             llave = "{";
                         }
 
-                        if (valor.Contains("Principal")) {
-                            tradu = true;
-                        }
-                        else
+                        if (valor.Trim().Contains("}"))
                         {
-                            tradu = true;
+                            llave = "}";
                         }
 
-                        if (!valor.Contains("Funciones"))
-                        {
-                            errores = "Se esperaba la palabra Metodo " + datos;
 
-                        }
-                        else if(!valor.Contains("Principal"))
+                       else if (valor.Contains("SINO"))
                         {
-                           inicioval = inicio(datos[i], "");
-                           inicioval2 = fin(datos[i], "(");
-
-                            //string de los parametros 
-                             ident = datos[i].Substring((inicioval), (inicioval2));
-                            if (ident.Trim() != "") 
+                            inicioval = inicio(datos[i], "{");
+                            inicioval2 = fin(datos[i], "");
+                            //nombre que se le dara al metodo 
+                            ident = datos[i].Substring((inicioval), (inicioval2));
+                            if (lexico.Reservada(ident.Trim()))
                             {
-                                String[] listaParametros = null;
-                                if (ident.Contains(","))
-                                {
-                                    listaParametros = ident.Split(',');
+                                errores += "Se esperaban llaves \n";
 
-                                }
-                                else
-                                {
-                                    listaParametros = new string[i];
-                                    listaParametros[0] = ident;
-                                }
-
-                                for (int j = 0; j<listaParametros.Length; j++)
-                                {
-                                    String detalles = listaParametros[j];
-                                    if (detalles.Contains("entero") || detalles.Contains("cadena") || detalles.Contains("booleano") || detalles.Contains("decimal") || detalles.Contains("caracter"))
-                                    {
-                                        inicioval = 0;
-                                        inicioval2 = fin(datos[i], ":");
-                                        ident = datos[i].Substring((inicioval), (inicioval2));
-                                        if (lexico.Reservada(ident.Trim()))
-                                        {
-                                            errores += "Se esperaba un identificador \n";
-
-                                        }
-
-                                    }
-                                }
                             }
+
                         }
+                        
 
                     }
-                    catch (Exception e) {
+                    catch (Exception e)
+                    {
                         errores += "Error en la gramatica de la funcion ingresada ";
                     }
-                
+
                 }
 
 
-                
+
             }
+
+
+
+
+
+
+
 
 
             if (errores != "")
-            {
-                MessageBox.Show(errores, "Cuadro Errores");
+                {
+                    MessageBox.Show(errores, "Cuadro Errores");
+
+                }
+                else
+                {
+                    MessageBox.Show("No se han encontrado Errores Semanticos", "Cuadro Errores");
+                }
+
+
+
+
+
 
             }
-            else
-            {
-                MessageBox.Show("No se han encontrado Errores Semanticos", "Cuadro Errores");
-            }
-        }
+        
 
         private int inicio(string cadena, string comparacion)
         {
@@ -176,18 +169,16 @@ namespace IDE
             }
             return inicio;
         }
-
         private int fin(string cadena, string comparacion)
         {
             int fin = cadena.ToString().IndexOf(comparacion.ToUpper());
-            if (fin == 1) {
-                fin = cadena.ToString().IndexOf(comparacion.ToUpper());
+            if (fin == 1)
+            {
+               fin = cadena.ToString().IndexOf(comparacion.ToUpper());
             }
             return fin;
         }
-*/
 
-            }
+
         }
     }
-}
