@@ -53,6 +53,7 @@ namespace IDE
         {
             String texto;
             texto = Entrada.Text;
+            String[] nuevo = new String[] { texto };
             Analizador analiz = new Analizador();
             analiz.Analizador_cadena(texto);
 
@@ -71,6 +72,9 @@ namespace IDE
                 Token actual = lis_toks.ElementAt(i);
                 
             }
+
+            AnalizadorSintactico sintactico = new AnalizadorSintactico();
+            sintactico.AnalizadorL(nuevo);
         }
 
 
