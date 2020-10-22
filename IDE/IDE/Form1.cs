@@ -25,7 +25,7 @@ namespace IDE
         string[] Operadores = new string[] { "||" , "&&" , "!" , "(" , ")" , "<" , ">" , ">=" , "<=" , "==" , "!="};
         string[] Asignacion_Final = new string[] { "=" , ";"};
         string[] Comentarios = new string[] { "//" , "/*" , "*/"};
-        string[] Reservadas = new string[] { "SI" , "SINO" , "SINO_SI" , "MIENTRAS" , "HACER" , "DESDE" , "HASTA" , "INCREMENTO"};
+        string[] Reservadas = new string[] { "SI" , "SINO" , "SINO_SI" , "MIENTRAS" , "HACER" , "DESDE" , "HASTA" , "INCREMENTO" , "Principal"};
         static private List<Token> lis_toks;
 
         int posicion = 0;
@@ -80,13 +80,39 @@ namespace IDE
 
         private void nuevoProyectoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Entrada.Enabled = true;
-            Salida.Enabled = true;
-            tablaErrores.Enabled = true;
-            Entrada.Clear();
-            Salida.Clear();
-            tablaErrores.Clear();
-        }
+            string nombreProyecto;
+            nombreProyecto = Microsoft.VisualBasic.Interaction.InputBox("Ingrese nombre del Proyecto:" , "Nuevo Proyecto", "", 100, 0);
+
+
+            string carpeta = Application.StartupPath + nombreProyecto;
+            try
+            {
+                if (Directory.Exists(carpeta))
+                {
+                    MessageBox.Show("Ese nombre ya existe ");
+                }
+                else
+                {
+                    Directory.CreateDirectory(carpeta);
+                    MessageBox.Show("Proyecto crado con exito! ");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error :" + ex.Message);
+            }
+                /*Entrada.Enabled = true;
+                Salida.Enabled = true;
+                tablaErrores.Enabled = true;
+                Entrada.Clear();
+                Salida.Clear();
+                tablaErrores.Clear();*/
+
+            }
+        
+    
+   
 
         private void abrirProyectoToolStripMenuItem_Click(object sender, EventArgs e)
         {
