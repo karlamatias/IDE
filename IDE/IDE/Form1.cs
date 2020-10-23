@@ -74,7 +74,8 @@ namespace IDE
             }
 
             AnalizadorSintactico sintactico = new AnalizadorSintactico();
-            sintactico.AnalizadorL(nuevo);
+            sintactico.MetodoPrincipal(nuevo);
+            sintactico.DeclararIF_Else(nuevo);
         }
 
 

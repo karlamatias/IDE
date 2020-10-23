@@ -306,7 +306,7 @@ namespace IDE
         public Boolean Reservada(String sente)
         {
             sente = sente.ToUpper();
-            if (sente.Equals("Principal ") || sente.Equals("PRINCIPAL "))
+            if (sente.Equals("Principal") || sente.Equals("PRINCIPAL"))
             {
                 return true;
             }
