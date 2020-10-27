@@ -74,8 +74,12 @@ namespace IDE
             }
 
             AnalizadorSintactico sintactico = new AnalizadorSintactico();
-            sintactico.MetodoPrincipal(nuevo);
-            sintactico.DeclararIF_Else(nuevo);
+            sintactico.AnalizadorL(nuevo);
+
+
+            sintactico.generarListaErrores();
+            CuadroSintactico.Text = sintactico.getRetornoErrores();
+            //sintactico.DeclararIF_Else(nuevo);
         }
 
 

@@ -15,13 +15,12 @@ namespace IDE
         public string sol_error;
         public int columna;
 
-        public ErroresSintacticos( int nl, string e, string se, int columna )
+        public ErroresSintacticos(string error, int fila, int columna, string solucion )
         {
-            
 
-                num_lineaE = nl;
-                error = e;
-                sol_error = se;
+                error = error;
+                num_lineaE = fila;
+                sol_error = solucion;
                 columna = columna;
 
             }
