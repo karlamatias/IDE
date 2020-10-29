@@ -74,7 +74,7 @@ namespace IDE
             }
 
             AnalizadorSintactico sintactico = new AnalizadorSintactico();
-            sintactico.AnalizadorL(nuevo);
+            sintactico.Analizar(nuevo);
 
 
             sintactico.generarListaErrores();
