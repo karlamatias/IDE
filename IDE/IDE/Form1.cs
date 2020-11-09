@@ -74,27 +74,31 @@ namespace IDE
             }
 
             AnalizadorSintactico sintactico = new AnalizadorSintactico();
-            sintactico.Analizar(nuevo);
+            sintactico.AnalizadorL(nuevo);
 
 
             sintactico.generarListaErrores();
             CuadroSintactico.Text = sintactico.getRetornoErrores();
-            //sintactico.DeclararIF_Else(nuevo);
+            
         }
 
 
         private void nuevoProyectoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+
             string nombreProyecto;
             nombreProyecto = Microsoft.VisualBasic.Interaction.InputBox("Ingrese nombre del Proyecto:" , "Nuevo Proyecto", "", 100, 0);
 
 
-            string carpeta = Application.StartupPath + nombreProyecto;
+            string carpeta = "\\Escritorio" + nombreProyecto;
             try
-            {
+            { 
                 if (Directory.Exists(carpeta))
                 {
                     MessageBox.Show("Ese nombre ya existe ");
+                    
+
                 }
                 else
                 {
@@ -107,12 +111,12 @@ namespace IDE
 
                 MessageBox.Show("Error :" + ex.Message);
             }
-                /*Entrada.Enabled = true;
+                Entrada.Enabled = true;
                 Salida.Enabled = true;
                 tablaErrores.Enabled = true;
                 Entrada.Clear();
                 Salida.Clear();
-                tablaErrores.Clear();*/
+                tablaErrores.Clear();
 
             }
         
@@ -130,7 +134,7 @@ namespace IDE
             openFileDialog1.Filter = "rich text box(*.txt) | *.txt";
             openFileDialog1.FileName = "";
             openFileDialog1.FilterIndex = 2;
-            openFileDialog1.InitialDirectory = "Escritorio";
+            openFileDialog1.InitialDirectory = "C:\\Users\\USUARIO\\source\\repos\\IDE2\\IDE\\IDE\\bin";
             openFileDialog1.CheckFileExists = true;
             openFileDialog1.CheckPathExists = true;
 

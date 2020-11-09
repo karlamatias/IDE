@@ -25,14 +25,13 @@ namespace IDE
         
         static private List<ErroresSintacticos> listaErroresS;
        
-        int columna = 1;
-        int fila = 1;
+        
         public void addError(string error, int fila, int columna, string solucion)
         {
             ErroresSintacticos errores = new ErroresSintacticos(error, fila, columna, solucion);
             listaErroresS.Add(errores);
         }
-        /*  public AnalizadorSintactico()
+          public AnalizadorSintactico()
           {
 
               //errores tokens
@@ -508,10 +507,9 @@ namespace IDE
           {
               return listaErroresS;
           }
-        */
+        
 
-       
-            //No terminales
+           /* //No terminales
             string[] columnas = {"Principal ( ) ", "{", "}", "id", "entero", "decimal", "booleano", "char", "cadena", "SI", "SINO", "NO", "MIENTRAS",
                 "HACER" ,"DESDE", "HASTA", "<", ">", "<=", ">=", "=", "!=", " Ɛ", "++", "--", "$"};
             string[] filas = { "E", "P", "C", "CV", "B", "V", "IF", "WHILE", "FOR", "IF", "SI", "O", "CON", "NO", "SINO", "F", "H", "I", "S" };
@@ -543,11 +541,11 @@ namespace IDE
 
         public AnalizadorSintactico()
         {
+            int columna = 1;
+            int fila = 1;
             listaErroresS = new List<ErroresSintacticos>();
-
             string  textoSucio = "" ;
             string[] texto = limpiarTexto(textoSucio);
-            GenerarTabla();
  
         }
 
@@ -564,8 +562,7 @@ namespace IDE
             return tablacompleta.ElementAt(a)[b].Split(' ');
         }
 
-
-        Stack<string[]> tablaCompleta;
+ 
         Stack<string> cadena;
         public void Analizar(string[] text)
         {
@@ -606,15 +603,6 @@ namespace IDE
         }
 
         string[] aux;
-        public void GenerarTabla()
-        {
-            for (int i = 0; i < tabla.Length; i++)
-            {
-                //tablacompleta.Add(tabla[i].Split((char)+ ''));
-            }
-
-        }
-
 
 
         public int DevolverPosicion(string[] busca,string cad)
@@ -633,8 +621,6 @@ namespace IDE
             }
             return aux;
         }
-
-
 
         public void generarListaErrores()
         {
@@ -656,6 +642,6 @@ namespace IDE
         public List<ErroresSintacticos> getListaErrores()
         {
             return listaErroresS;
-        }
+        }*/
     }
     }
